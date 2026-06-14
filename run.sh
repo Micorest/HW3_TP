@@ -66,6 +66,7 @@ elif [ "$COMMAND" == "help" ]; then
     echo "  ./run.sh inside_generator  — Проверить /data в генераторе"
     echo "  ./run.sh inside_reporter   — Проверить /data в аналитике"
     echo "  ./run.sh report_server     — Запустить веб-сервер с отчетом"
+    echo "  ./run.sh fast_report_server— Запустить быстро, пройдя все этапы, веб-сервер с отчетом"
 
 else
     echo "Неизвестная команда. Напишите параметр-команду help."
