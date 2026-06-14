@@ -17,13 +17,30 @@ elif [ "$COMMAND" == "create_local_data" ]; then
     python3 generate.py local_data
 
 elif [ "$COMMAND" == "build_reporter" ]; then
-    echo "Сборка образа аналитика (reporter)"
+    echo "Сборка образа аналитика"
     docker build -t reporter -f Dockerfile.reporter .
 
 elif [ "$COMMAND" == "run_reporter" ]; then
     echo "Запуск аналитика в контейнере"
     mkdir -p data
     docker run --rm -v "$(pwd)/data:/data" reporter
+
+elif [ "$COMMAND" == "structure" ]; then
+    echo "Вывод структуры проекта"
+    find . | sort
+
+elif [ "$COMMAND" == "clear_data" ]; then
+    echo "Удаление сгенерированных данных из data/"
+    rm -rf data/*
+    echo "Готово. Папка data пуста."
+
+elif [ "$COMMAND" == "inside_generator" ]; then
+    echo "Проверка содержимого /data внутри контейнера generator"
+    docker run --rm -v "$(pwd)/data:/data" generator ls -la /data
+
+elif [ "$COMMAND" == "inside_reporter" ]; then
+    echo "Проверка содержимого /data внутри контейнера reporter" 
+    docker run --rm -v "$(pwd)/data:/data" reporter ls -la /data
 
 elif [ "$COMMAND" == "help" ]; then
     echo "Поддерживаются команды:"
@@ -32,6 +49,11 @@ elif [ "$COMMAND" == "help" ]; then
     echo "./run.sh create_local_data"
     echo "./run.sh build_reporter"
     echo "./run.sh run_reporter"
+    echo "./run.sh structure"
+    echo "./run.sh clear_data"
+    echo "./run.sh inside_generator"
+    echo "./run.sh inside_reporter"
+
 else
     echo "Неизвестная команда. Напишите параметр-команду help."
 fi
