@@ -51,7 +51,10 @@ chmod +x run.sh
 "Когда приложение, запущенное в codespace, выводит на терминал данные, содержащие URL-адрес localhost, например http://localhost:PORT или http://127.0.0.1:PORT, порт автоматически перенаправляется."
 (см. подробнее https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace)
 
-Сразу же после /run.sh fast_report_server
+Сразу же после 
+```bash
+/run.sh fast_report_server
+```
 Можно переходить http://127.0.0.1:8080
 
 В вкладке "Ports" в нижней панели VS Code так же будет отображаться этот порт 8080 (на него проброшен 80-й порт из Docker контейнера).
@@ -62,6 +65,6 @@ chmod +x run.sh
 В открывшемся черном окне терминала запусти команду:
 
 ```bash
-./run.sh report_server
+./run.sh fast_report_server
 ```
 
