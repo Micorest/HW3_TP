@@ -3,49 +3,65 @@
 
 ### Генерация данных:
 ```bash
-/run.sh build_generator
-/run.sh run_generator
+./run.sh build_generator
+# перед запуском должен быть образ генератора
+./run.sh run_generator
 ```
 
 ### Создание отчета:
 ```bash
-/run.sh build_reporter
-/run.sh run_reporter
+./run.sh build_reporter
+# перед запуском должен быть образ аналитика
+# перед запуском должен быть data/data.csv
+./run.sh run_reporter
 ```
 
 #### Рекомендуется использовать команды генерации и аналитика в таком порядке во избежании docker ошибок.
 
 ### Для дополнительной инфоромации по имеющимся командам:
 ```bash
-/run.sh help
+./run.sh help
 ```
 
 ### Запуск веб-сервера:
 ```bash
-/run.sh report_server
+./run.sh report_server
 ```
 
 ### Быстрый запуск веб-сервера:
 ```bash
-/run.sh report_server
+./run.sh fast_report_server
 ```
 
 #### Сразу генерирует данные, создает отчет и открывает порты.
 
 ### Открытие веб-сервера:
-#### Через Github Codespaces в VS Code
-Используется встроенный в Codespaces механизм туннелирования (Port Forwarding):
-"Когда приложение, запущенное в codespace, выводит на терминал данные, содержащие URL-адрес localhost, например http://localhost:PORT или http://127.0.0.1:PORT, порт автоматически перенаправляется."
-(см. подробнее https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace)
-
-Сразу же после /run.sh report_server
-Можно переходить http://127.0.0.1:8080
+#### Клонировать репозиторий:
+```bash
+git clone https://github.com/Micorest/HW3_TP.git
+```
 
 #### При возникновении ошибки прав доступа:
 ```bash
 chmod +x run.sh
 ```
 
+#### Через Github Codespaces в VS Code или через Linux:
+Используется встроенный в Codespaces механизм туннелирования (Port Forwarding):
+"Когда приложение, запущенное в codespace, выводит на терминал данные, содержащие URL-адрес localhost, например http://localhost:PORT или http://127.0.0.1:PORT, порт автоматически перенаправляется."
+(см. подробнее https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace)
+
+Сразу же после /run.sh fast_report_server
+Можно переходить http://127.0.0.1:8080
+
 В вкладке "Ports" в нижней панели VS Code так же будет отображаться этот порт 8080 (на него проброшен 80-й порт из Docker контейнера).
 
-#### Через localhost на
+#### Через Windows с настроенным и открытым Docker, с скаченным Git:
+Перейди в Проводнике в папку, в которой клонирован репозиторий.
+Кликни правой кнопкой мыши по пустому месту внутри папки и выбери «Git Bash Here».
+В открывшемся черном окне терминала запусти команду:
+
+```bash
+./run.sh report_server
+```
+
