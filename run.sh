@@ -43,9 +43,16 @@ elif [ "$COMMAND" == "inside_reporter" ]; then
     docker run --rm -v "$(pwd)/data:/data" reporter ls -la /data
 
 elif [ "$COMMAND" == "report_server" ]; then
-    echo "Перейдите по адресу для просмотра отчета http://127.0.0.1:8080/report.html"
+    echo "Перейдите по адресу для просмотра отчета http://127.0.0.1:8080"
     echo "Нажмите Ctrl+C для остановки сервера."
-    docker run --rm -p 8080:80 -v "$(pwd)/data:/usr/share/nginx/html" nginx:alpine
+    docker run --rm -p 8080:80 -v "$(pwd)/data/report.html:/usr/share/nginx/html/index.html" nginx:alpine
+
+elif [ "$COMMAND" == "fast_report_server" ]; then
+    ./run.sh build_generator
+    ./run.sh run_generator
+    ./run.sh build_reporter
+    ./run.sh run_reporter
+    ./run.sh report_server
 
 elif [ "$COMMAND" == "help" ]; then
     echo "Поддерживаются команды:"
