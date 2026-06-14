@@ -53,7 +53,7 @@ chmod +x run.sh
 
 Сразу же после 
 ```bash
-/run.sh fast_report_server
+./run.sh fast_report_server
 ```
 Можно переходить http://127.0.0.1:8080
 
