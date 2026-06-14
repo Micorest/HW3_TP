@@ -42,17 +42,23 @@ elif [ "$COMMAND" == "inside_reporter" ]; then
     echo "Проверка содержимого /data внутри контейнера reporter" 
     docker run --rm -v "$(pwd)/data:/data" reporter ls -la /data
 
+elif [ "$COMMAND" == "report_server" ]; then
+    echo "Перейдите по адресу для просмотра отчета http://127.0.0.1:8080/report.html"
+    echo "Нажмите Ctrl+C для остановки сервера."
+    docker run --rm -p 8080:80 -v "$(pwd)/data:/usr/share/nginx/html" nginx:alpine
+
 elif [ "$COMMAND" == "help" ]; then
     echo "Поддерживаются команды:"
-    echo "./run.sh build_generator"
-    echo "./run.sh run_generator"
-    echo "./run.sh create_local_data"
-    echo "./run.sh build_reporter"
-    echo "./run.sh run_reporter"
-    echo "./run.sh structure"
-    echo "./run.sh clear_data"
-    echo "./run.sh inside_generator"
-    echo "./run.sh inside_reporter"
+    echo "  ./run.sh build_generator   — Собрать образ генератора"
+    echo "  ./run.sh run_generator     — Запустить генератор (создаст data/data.csv)"
+    echo "  ./run.sh create_local_data — Локальный запуск генератора (создаст local_data/data.csv)"
+    echo "  ./run.sh build_reporter    — Собрать образ аналитика"
+    echo "  ./run.sh run_reporter      — Запустить аналитика (создаст data/report.html)"
+    echo "  ./run.sh structure         — Вывести файлы"
+    echo "  ./run.sh clear_data        — Очистить папку data/"
+    echo "  ./run.sh inside_generator  — Проверить /data в генераторе"
+    echo "  ./run.sh inside_reporter   — Проверить /data в аналитике"
+    echo "  ./run.sh report_server     — Запустить веб-сервер с отчетом"
 
 else
     echo "Неизвестная команда. Напишите параметр-команду help."
